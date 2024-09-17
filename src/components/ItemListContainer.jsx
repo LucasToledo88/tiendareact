@@ -1,35 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Container, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import ItemList from './ItemList';  // Componente de presentación
+import ItemList from './ItemList';
 
-const ItemListContainer = () => {
-  const { categoryId } = useParams();
-  const [products, setProducts] = useState([]);
+function ItemListContainer() {
+  const [productos, setProductos] = useState([]);
+  const { categoryName } = useParams();
 
   useEffect(() => {
-    // Simular una llamada asíncrona a una API o base de datos
-    const fetchProducts = new Promise((resolve) => {
-      setTimeout(() => {
-        const allProducts = [/* Tu lista de productos */];
-        resolve(allProducts);
-      }, 1000);
-    });
+    fetch(`https://66e84fadb17821a9d9dc37ab.mockapi.io/api/v1/products/`)
+      .then(res => res.json())
+      .then(res => {
+        if (categoryName) {
+          setProductos(res.filter(producto => producto.category === categoryName));
+        } else {
+          setProductos(res);
+        }
+      });
 
-    fetchProducts.then((data) => {
-      if (categoryId) {
-        setProducts(data.filter(product => product.category === categoryId));
-      } else {
-        setProducts(data);
-      }
-    });
-  }, [categoryId]);
+  }, [categoryName]);
 
   return (
-    <div>
-      <h1>{categoryId ? `Categoría: ${categoryId}` : 'Todos los Productos'}</h1>
-      <ItemList products={products} />
-    </div>
-  );
-};
+    <Container>
+      <h5>{categoryName ? 'Productos de la categoria: ' + categoryName : 'Todos los productos'}</h5>
+      <Row xs={1} md={2} lg={4} className='g-2'>
+        <ItemList listado={productos}></ItemList>
+      </Row>
+    </Container>
+  )
+}
 
 export default ItemListContainer;

@@ -1,28 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import ItemDetail from './ItemDetail';  // Componente de presentación
+import { Card } from 'react-bootstrap';
+import ItemDetail from './ItemDetail';
 
-const ItemDetailContainer = () => {
-  const { itemId } = useParams();
-  const [product, setProduct] = useState(null);
+function ItemDetailContainer() {
+  const [detail, setDetail] = useState({});
+  const { id } = useParams();
 
   useEffect(() => {
-    const fetchProduct = new Promise((resolve) => {
-      setTimeout(() => {
-        const productList = [/* Lista de productos */];
-        const foundProduct = productList.find(item => item.id === parseInt(itemId));
-        resolve(foundProduct);
-      }, 1000);
-    });
-
-    fetchProduct.then((data) => setProduct(data));
-  }, [itemId]);
+    fetch(`https://66e84fadb17821a9d9dc37ab.mockapi.io/api/v1/products/${id}`)
+      .then(res => res.json())
+      .then(res => setDetail(res))
+  }, [id]);
 
   return (
-    <div>
-      {product ? <ItemDetail product={product} /> : <p>Cargando...</p>}
-    </div>
-  );
-};
+    <ItemDetail detail={detail}></ItemDetail>
+  )
+}
 
 export default ItemDetailContainer;
