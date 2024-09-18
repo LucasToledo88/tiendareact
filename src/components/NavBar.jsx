@@ -19,7 +19,7 @@ export default function NavBar() {
   return (
     <div className="navbar navbar-expand-lg border-bottom bg-body-tertiary mb-2">
       <div className="container">
-        <a className="navbar-brand" href="/">Agusele ReactJS</a>
+        <a className="navbar-brand" href="/">Tienda ReactJS</a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navShop" aria-controls="navShop" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>

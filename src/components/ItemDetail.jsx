@@ -3,7 +3,7 @@ import ItemCount from './ItemCount';
 
 function ItemDetail({ detail }) {
 
-  const count = 0; 
+  const count = 0; // iría la lógica cuando corresponda
 
   return (
     <Card className='shadow-sm mx-auto' key={detail.id} style={{ maxWidth: '480px' }} >
