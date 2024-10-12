@@ -1,21 +1,37 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Card } from 'react-bootstrap';
-import ItemDetail from './ItemDetail';
+import { ItemDetail } from './ItemDetail';
+import { getProduct } from '../firebase/db';
 
-function ItemDetailContainer() {
-  const [detail, setDetail] = useState({});
+export const ItemDetailContainer = () => {
+
+  const [detail, setDetail] = useState(null);
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`https://66e84fadb17821a9d9dc37ab.mockapi.io/api/v1/products/${id}`)
-      .then(res => res.json())
-      .then(res => setDetail(res))
+    setLoading(true)
+    getProduct(id, setDetail, setLoading, setError);
   }, [id]);
 
   return (
-    <ItemDetail detail={detail}></ItemDetail>
+
+    <>
+      {
+        loading
+          ?
+          <h5 className='text-info'>
+            <span className="spinner-border" role="status"></span>
+            Cargando Datos del Producto.
+          </h5>
+          :
+          <>
+            {error && <h2>Ups, No se encontró el producto.</h2>}
+            {detail && <ItemDetail {...detail} />}
+          </>
+      }
+
+    </>
   )
 }
-
-export default ItemDetailContainer;

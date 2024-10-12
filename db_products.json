@@ -1,0 +1,113 @@
+[
+  {
+    "id": "",
+    "code": "7112233445566",
+    "name": "Pizza Anchoas",
+    "price": 4200,
+    "category": "Pizza",
+    "important": true,
+    "active": true,
+    "stock": 10,
+    "thumbnail": "https://loremflickr.com/640/480/abstract"
+  },
+  {
+    "id": "",
+    "code": "7321564878951",
+    "name": "Pizza Napolitana",
+    "price": 3600,
+    "category": "Pizza",
+    "important": false,
+    "active": true,
+    "stock": 13,
+    "thumbnail": "https://loremflickr.com/640/480/abstract"
+  },
+  {
+    "id": "",
+    "code": "7623134652312",
+    "name": "Pizza 4 Quesos",
+    "price": 3200,
+    "category": "Pizza",
+    "important": false,
+    "active": true,
+    "stock": 14,
+    "thumbnail": "https://loremflickr.com/640/480/abstract"
+  },
+  {
+    "id": "",
+    "code": "7321654678643",
+    "name": "Lomito Comun",
+    "price": 2100,
+    "category": "Lomito",
+    "important": true,
+    "active": true,
+    "stock": 12,
+    "thumbnail": "https://loremflickr.com/640/480/abstract"
+  },
+  {
+    "id": "",
+    "code": "7123456451234",
+    "name": "Lomito Completo",
+    "price": 2200,
+    "category": "Lomito",
+    "important": true,
+    "active": true,
+    "stock": 4,
+    "thumbnail": "https://loremflickr.com/640/480/abstract"
+  },
+  {
+    "id": "",
+    "code": "7123145646748",
+    "name": "Lomito de la casa",
+    "price": 2400,
+    "category": "Lomito",
+    "important": true,
+    "active": true,
+    "stock": 6,
+    "thumbnail": "https://loremflickr.com/640/480/abstract"
+  },
+  {
+    "id": "",
+    "code": "7678451231456",
+    "name": "Hamburguesa comun",
+    "price": 2300,
+    "category": "Hamburguesa",
+    "important": true,
+    "active": true,
+    "stock": 6,
+    "thumbnail": "https://loremflickr.com/640/480/abstract"
+  },
+  {
+    "id": "",
+    "code": "7654612312345",
+    "name": "Hamburguesa Especial",
+    "price": 2400,
+    "category": "Hamburguesa",
+    "important": true,
+    "active": true,
+    "stock": 6,
+    "thumbnail": "https://loremflickr.com/640/480/abstract"
+  },
+  {
+    "id": "",
+    "code": "7564213456123",
+    "name": "Hamburguesa Completa",
+    "price": 2340,
+    "category": "Hamburguesa",
+    "important": true,
+    "active": true,
+    "stock": 6,
+    "thumbnail": "https://loremflickr.com/640/480/abstract"
+  },
+  {
+    "id": "",
+    "code": "7923123456123",
+    "name": "Hamburguesa de la Casa",
+    "price": 2380,
+    "category": "Hamburguesa",
+    "important": true,
+    "active": true,
+    "stock": 6,
+    "thumbnail": "https://loremflickr.com/640/480/abstract"
+  }
+  
+]

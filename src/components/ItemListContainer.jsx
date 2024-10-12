@@ -1,33 +1,37 @@
 import { useEffect, useState } from 'react';
-import { Container, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import ItemList from './ItemList';
+import { ItemList } from './ItemList';
+import { getProducts, getProductsByCategory } from '../firebase/db';
 
-function ItemListContainer() {
-  const [productos, setProductos] = useState([]);
+export const ItemListContainer = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { categoryName } = useParams();
 
   useEffect(() => {
-    fetch(`https://66e84fadb17821a9d9dc37ab.mockapi.io/api/v1/products/`)
-      .then(res => res.json())
-      .then(res => {
-        if (categoryName) {
-          setProductos(res.filter(producto => producto.category === categoryName));
-        } else {
-          setProductos(res);
-        }
-      });
-
+    categoryName ? getProductsByCategory(categoryName, setProducts, setLoading) : getProducts(setProducts, setLoading);
   }, [categoryName]);
 
-  return (
-    <Container>
-      <h5>{categoryName ? 'Productos de la categoria: ' + categoryName : 'Todos los productos'}</h5>
-      <Row xs={1} md={2} lg={4} className='g-2'>
-        <ItemList listado={productos}></ItemList>
-      </Row>
-    </Container>
-  )
-}
+  if (loading) {
+    return (
+      <div>
+        <h5 className='text-info'>
+          <span className="spinner-border" role="status"></span>
+          Cargando Productos...
+        </h5>
+      </div>
+    )
+  } else {
+    return (
+      <div className="container">
+        <h5>{categoryName ? 'Productos de la categoria: ' + categoryName : 'Todos los products'}</h5>
+        <div className="row">
+          <ItemList listado={products}></ItemList>
 
-export default ItemListContainer;
+        </div>
+      </div>
+    )
+
+  }
+
+}

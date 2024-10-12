@@ -1,25 +1,12 @@
 import React from "react";
-import { useEffect, useState } from 'react';
-import CartWidget from './CartWidget';
+import { CartWidget } from './CartWidget';
 
-export default function NavBar() {
-
-  const [categorias, setCategorias] = useState([]);
-
-  useEffect(() => {
-    fetch(`https://66e84fadb17821a9d9dc37ab.mockapi.io/api/v1/products/`)
-      .then(res => res.json())
-      .then(res => {
-        const result = [...new Set(res.map(item => item.category))];
-        setCategorias(result.sort());
-      });
-  }, []);
-
+export const NavBar = () => {
 
   return (
     <div className="navbar navbar-expand-lg border-bottom bg-body-tertiary mb-2">
       <div className="container">
-        <a className="navbar-brand" href="/">Tienda ReactJS</a>
+        <a className="navbar-brand" href="/">TiendaReactJS</a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navShop" aria-controls="navShop" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -33,7 +20,9 @@ export default function NavBar() {
                 Categorias
               </a>
               <ul className="dropdown-menu">
-                {categorias.map(categoria => <li key={categoria}><a className="dropdown-item" href={'/category/' + categoria}>{categoria}</a></li>)}
+                <li key='Pizzas'><a className="dropdown-item" href={'/category/Pizzas'}>Pizzas</a></li>
+                <li key='Hamburguesas'><a className="dropdown-item" href={'/category/Hamburguesas'}>Hamburguesas</a></li>
+                <li key='Lomitos'><a className="dropdown-item" href={'/category/Lomitos'}>Lomitos</a></li>
               </ul>
             </li>
             <li className="nav-item">
