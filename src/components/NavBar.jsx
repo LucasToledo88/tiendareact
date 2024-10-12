@@ -20,9 +20,9 @@ export const NavBar = () => {
                 Categorias
               </a>
               <ul className="dropdown-menu">
-                <li key='Pizzas'><a className="dropdown-item" href={'/category/Pizzas'}>Pizzas</a></li>
-                <li key='Hamburguesas'><a className="dropdown-item" href={'/category/Hamburguesas'}>Hamburguesas</a></li>
-                <li key='Lomitos'><a className="dropdown-item" href={'/category/Lomitos'}>Lomitos</a></li>
+                <li key='Pizza'><a className="dropdown-item" href={'/category/Pizza'}>Pizza</a></li>
+                <li key='Hamburguesa'><a className="dropdown-item" href={'/category/Hamburguesa'}>Hamburguesa</a></li>
+                <li key='Lomito'><a className="dropdown-item" href={'/category/Lomito'}>Lomito</a></li>
               </ul>
             </li>
             <li className="nav-item">
