@@ -1,23 +1,23 @@
-import { getFirestore, collection, getDocs, query, where, doc, getDoc } from 'firebase/firestore';
-import {app} from './config';
+import { getFirestore, collection, getDocs, query, where, doc, getDoc, serverTimestamp, addDoc, setDoc } from 'firebase/firestore';
+import { app } from './config';
 
 const db = getFirestore(app);
 
 
-/** Obtener  los productos */
+/** Obtener todos los productos */
 export const getProducts = async (setProducts, setLoading) => {
   const querySnapshot = await getDocs(collection(db, "products"));
   const products = [];
   querySnapshot.forEach((doc) => {
     products.push(doc.data());
   });
-
+  //console.log('getProducts.products:', products)
   setProducts(products);
   setLoading(false);
 }
 
 
-/** Obtener  los productos de una Categoría pasada por paráemtro */
+/** Obtener todos los productos de una Categoría pasada por paráemtro */
 export const getProductsByCategory = async (category, setProducts, setLoading) => {
   const docsRef = collection(db, "products");
   const products = [];
@@ -32,7 +32,7 @@ export const getProductsByCategory = async (category, setProducts, setLoading) =
 }
 
 
-/** Obtener el producto según su ID pasado por parámetro */
+/** Obtener un producto según su ID pasado por parámetro */
 export const getProduct = async (id, setProduct, setLoading, setError) => {
   setLoading(true);
   const docRef = doc(db, "products", id);
@@ -42,7 +42,14 @@ export const getProduct = async (id, setProduct, setLoading, setError) => {
     setError(false);
   } else {
     setError(true);
-    console.log('Documento no existente');
+    console.log('Documento no existe');
   }
   setLoading(false);
+}
+
+/** Obtener un producto según su ID pasado por parámetro */
+export const createOrder = async (orderData) => {
+  const ordersCollection = collection(db, "orders");
+  const docRef = await addDoc(ordersCollection, orderData);
+  return docRef;
 }

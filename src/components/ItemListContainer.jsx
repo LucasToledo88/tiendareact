@@ -27,7 +27,6 @@ export const ItemListContainer = () => {
         <h5>{categoryName ? 'Productos de la categoria: ' + categoryName : 'Todos los products'}</h5>
         <div className="row">
           <ItemList listado={products}></ItemList>
-
         </div>
       </div>
     )

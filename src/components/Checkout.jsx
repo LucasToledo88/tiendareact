@@ -1,10 +1,11 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
+import { createOrder } from "../firebase/db";
 
 
 export const CheckOut = () => {
 
-  const { cart, totalPrice, clearCart } = useContext(CartContext);
+  const { cart, total, clearCart } = useContext(CartContext);
 
   const [formCheckout, setFormCheckout] = useState({
     name: "",
@@ -38,53 +39,45 @@ export const CheckOut = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newOrder = {
+    const orderData = {
       buyer: formCheckout,
       items: cart,
-      totalPrice,
-      date: serverTimestamp(),
+      total,
     };
 
-    const order = {}; //await addDoc(collection(db, "orders"), newOrder);
+    console.log(orderData);
 
-    // Vaciar formulario
-    setFormCheckout({
-      name: "",
-      phone: 0,
-      email: "",
-    });
+    const order = await createOrder(orderData);
 
+    setFormCheckout({ name: "", phone: 0, email: "" });
 
-    // Vaciar el carrito
     clearCart();
-
-    // Setear el orderId
     setOrderId(order.id);
-
   };
 
   if (orderId) {
     return (
       <>
-        <h3>Su ID de orden de compra es...</h3>
+        <h5>Gracias por tu Compra...</h5>
         <br />
-        <h3>{orderId}</h3>
+        <h5>Órden de compra generada: {orderId}</h5>
       </>
     )
-  }
+  } else {
 
-  return (
-    <div className="container d-flex justify-content-center m-5">
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="">Nombre</label>
-        <input type="text" className="form-control" value={formCheckout.name} onChange={handleName} />
-        <label htmlFor="">Teléfono</label>
-        <input type="number" className="form-control" value={formCheckout.phone} onChange={handlePhone} />
-        <label htmlFor="">Email</label>
-        <input type="email" className="form-control" value={formCheckout.email} onChange={handleEmail} />
-        <input type="submit" className="mt-3 btn btn-success" value="Terminar la compra" />
-      </form>
-    </div>
-  );
+    return (
+      <div className="container d-flex justify-content-center m-5">
+        <form onSubmit={handleSubmit} className="was-validated">
+          <label htmlFor="">Nombre</label>
+          <input required type="text" className="form-control" value={formCheckout.name} onChange={handleName} />
+          <label htmlFor="">Teléfono</label>
+          <input required type="number" className="form-control" value={formCheckout.phone} onChange={handlePhone} />
+          <label htmlFor="">Email</label>
+          <input required type="email" className="form-control" value={formCheckout.email} onChange={handleEmail} />
+          <input type="submit" className="mt-3 btn btn-success" value="Terminar la compra" />
+        </form>
+      </div>
+    );
+  }
 
 };

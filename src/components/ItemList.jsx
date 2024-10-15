@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 
 export const ItemList = ({ listado = [] }) => {
 
@@ -12,11 +13,10 @@ export const ItemList = ({ listado = [] }) => {
                 <h6>{producto.name}</h6>
                 <p>Precio: $ {producto.price}</p>
                 <div className='d-flex justify-content-evenly my-2'>
-                  <a className="btn btn-sm btn-success" href={'/product/' + producto.id}>Ver</a>
-                  <button className="btn btn-sm btn-primary" >Comprar</button>
+                  <Link to={'/item/' + producto.id} className="btn btn-sm btn-success">Ver Detalles</Link>
                 </div>
                 <span className='badge text-bg-info float-end'>{producto.category}</span>
-                <span className='badge text-bg-info float-end'>Stock Disp: {producto.stock}</span>
+                <span className='badge text-bg-secondary mt-1 float-end'>Stock Disponible: {producto.stock}</span>
               </div>
             </div>
           </div>

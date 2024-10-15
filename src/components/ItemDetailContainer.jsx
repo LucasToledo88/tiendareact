@@ -27,7 +27,7 @@ export const ItemDetailContainer = () => {
           </h5>
           :
           <>
-            {error && <h2>Ups, No se encontró el producto.</h2>}
+            {error && <h2>No se encontró el producto.</h2>}
             {detail && <ItemDetail {...detail} />}
           </>
       }

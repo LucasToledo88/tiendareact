@@ -1,28 +1,27 @@
 import React from "react";
 import { CartWidget } from './CartWidget';
+import { Link } from 'react-router-dom'
 
 export const NavBar = () => {
 
   return (
-    <div className="navbar navbar-expand-lg border-bottom bg-body-tertiary mb-2">
+    <div className="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
       <div className="container">
-        <a className="navbar-brand" href="/">TiendaReactJS</a>
+        <Link className="navbar-brand" to="/">Tienda React</Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navShop" aria-controls="navShop" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navShop">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <a className='nav-link' href="/">Home</a>
+            <li className="nav-link">
+              <Link className="dropdown-item" to="/">Home</Link>
             </li>
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Categorias
-              </a>
+              <Link className="nav-link dropdown-toggle" to="#"  role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</Link>
               <ul className="dropdown-menu">
-                <li key='Pizza'><a className="dropdown-item" href={'/category/Pizza'}>Pizza</a></li>
-                <li key='Hamburguesa'><a className="dropdown-item" href={'/category/Hamburguesa'}>Hamburguesa</a></li>
-                <li key='Lomito'><a className="dropdown-item" href={'/category/Lomito'}>Lomito</a></li>
+                <Link className="dropdown-item" to="/category/Pizza">Pizza</Link>
+                <Link className="dropdown-item" to="/category/Hamburguesa">Hamburguesa</Link>
+                <Link className="dropdown-item" to="/category/Lomito">Lomito</Link>
               </ul>
             </li>
             <li className="nav-item">

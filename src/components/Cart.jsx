@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 export const Cart = () => {
 
-  const { cart, clearCart, removeItem, totalPrice } = useContext(CartContext)
+  const { cart, clearCart, removeItem, total } = useContext(CartContext)
 
   const handleDeleteItem = (item) => {
     Swal.fire({
@@ -27,27 +27,16 @@ export const Cart = () => {
   return (
     <>
 
-      {totalPrice > 0 && (
-        <>
-          <div className="detalle">
-            <div className="encabezado">Artículo</div>
-            <div className="encabezado">Cantidad</div>
-            <div className="encabezado">Precio Unitario</div>
-            <div className="encabezado">Subtotal</div>
-            <div className="encabezado">(borrar)</div>
-          </div>
-        </>
-      )}
-
       {/* mapeamos los items en carrito... */}
       {cart.map((item) => (
 
-        <div class="detalle" key={item.id} >
-          <div class="dato">{item.name}</div>
-          <div class="dato">{item.quantity}</div>
-          <div class="dato">${item.price}</div>
-          <div class="dato">${item.subtotal}</div>
-          <div class="dato">
+        <div className="d-flex border p-2 mb-2" key={item.id}>
+          <div className="flex-shrink-0">
+            <img src={item.thumbnail} className="rounded" height={128} alt={item.name} />
+          </div>
+          <div className="flex-grow-1 ms-3">
+            <p>{item.name} </p>
+            <p>{item.quantity} unidades a ${item.price.toFixed(2)} cada uno, subtotal: ${item.subtotal}.</p>
             <button className="btn btn-danger" onClick={() => handleDeleteItem(item)}>
               Eliminar
             </button>
@@ -60,38 +49,32 @@ export const Cart = () => {
 
       {
 
-        totalPrice > 0 ?
-          // Hay productos...
+        total > 0 ?
           <>
 
-            <div class="detalle"  >
-              <div class="dato"> </div>
-              <div class="dato"> </div>
-              <div class="dato"><h2>Total: </h2></div>
-              <div class="dato"><h2>${totalPrice}</h2></div>
-              <div class="dato">
-                <Link to="/checkout">
-                  <button className="ms-2 btn btn-success">Comprar</button>
-                </Link>
-              </div>
-            </div>
+            <h4>Total: ${total}</h4>
 
-            <div class="detalle">
-              <div class="dato"></div>
-              <div class="dato"></div>
-              <div class="dato"></div>
-              <div class="dato"></div>
-              <div class="dato">
-                <button className="btn btn-outline-success" onClick={clearCart}>
-                  Vaciar carrito
-                </button>
-              </div>
-            </div>
+            <Link to="/checkout">
+              <button className="btn btn-success">Comprar</button>
+            </Link>
+
+            <button className="mx-2 btn btn-outline-danger" onClick={clearCart}>
+              Vaciar carrito
+            </button>
 
           </>
           :
           // Sin productos...
-          <h2>( Carrito Vacio )</h2>
+          <>
+            <h2>Tu Carrito está Vacio</h2>
+            <Link className="btn btn-outline-success" to="/">Volver al Home</Link>
+            <p className="mt-2">¿O qué estás buscando?</p>
+            <p>
+              <Link className="mx-2 btn btn-outline-secondary"to="/category/Pizza">Pizza</Link>
+              <Link className="mx-2 btn btn-outline-info"to="/category/Hamburguesa">Hamburguesa</Link>
+              <Link className="mx-2 btn btn-outline-primary"to="/category/Lomito">Lomito</Link>
+            </p>
+          </>
       }
 
     </>
